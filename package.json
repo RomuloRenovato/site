@@ -1,0 +1,1 @@
+{"name":"bobsom-site","private":true,"type":"module","scripts":{"qr":"node scripts/gerar-qr.mjs","dev":"npm run qr && astro dev","build":"npm run qr && astro build","preview":"astro preview"},"dependencies":{"@astrojs/sitemap":"^3.7.4","astro":"^5.18.2","qrcode":"^1.5.4","sharp":"^0.35.5"}}

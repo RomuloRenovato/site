@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Chamada from '../components/Chamada.astro';
+import Clientes from '../components/Clientes.astro';
+import Heroi from '../components/Heroi.astro';
+import { categorias, fotos, galeria, type Categoria } from '../data/fotos';
+import { site, tiposDeEvento } from '../data/site';
+
+const presentes = Object.keys(categorias).filter((c) => galeria.some((f) => f.categoria === c)) as Categoria[];
+---
+
+<Base titulo="Eventos realizados em Juiz de Fora e região" descricao="Fotos de eventos com a BobSom: palestras, festas, recepções e eventos evangélicos com som, luz, LED, tendas e mobiliário.">
+  <Heroi
+    sobretitulo="Eventos"
+    titulo="Alguns dos nossos eventos"
+    lead={`Atendemos ${tiposDeEvento.slice(0, -1).join(', ').toLowerCase()} e ${tiposDeEvento.at(-1)?.toLowerCase()}.`}
+    foto={fotos.palestra}
+  >
+    <div class="acoes">
+      <a class="botao botao--contorno" href={site.instagram} target="_blank" rel="noopener">Ver mais no Instagram {site.instagramNome}</a>
+    </div>
+  </Heroi>
+
+  <section class="secao">
+    <div class="largura">
+      <ul class="etiquetas" id="filtros" hidden>
+        <li style="display: contents"><button type="button" aria-pressed="true" data-filtro="todos">Todos</button></li>
+        {presentes.map((c) => (
+          <li style="display: contents"><button type="button" aria-pressed="false" data-filtro={c}>{categorias[c]}</button></li>
+        ))}
+      </ul>
+      <div class="mosaico" id="galeria">
+        {galeria.map((foto) => (
+          <figure data-categoria={foto.categoria}>
+            <Image src={foto.src} alt={foto.alt} widths={[420, 640, 900]} sizes="(max-width: 560px) 100vw, 390px" format="webp" />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Clientes />
+  <Chamada titulo="Seu evento pode ser o próximo." />
+</Base>
+
+<script>
+  const filtros = document.querySelector<HTMLElement>('#filtros');
+  if (filtros) {
+    filtros.hidden = false;
+    const botoes = filtros.querySelectorAll<HTMLButtonElement>('button');
+    const figuras = document.querySelectorAll<HTMLElement>('#galeria figure');
+    botoes.forEach((botao) => {
+      botao.addEventListener('click', () => {
+        const filtro = botao.dataset.filtro;
+        botoes.forEach((b) => b.setAttribute('aria-pressed', String(b === botao)));
+        figuras.forEach((f) => {
+          f.hidden = filtro !== 'todos' && f.dataset.categoria !== filtro;
+        });
+      });
+    });
+  }
+</script>

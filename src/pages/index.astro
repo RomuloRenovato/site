@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import BlocoAvaliar from '../components/BlocoAvaliar.astro';
+import Chamada from '../components/Chamada.astro';
+import Clientes from '../components/Clientes.astro';
+import simbolo from '../assets/simbolo.svg?raw';
+import { fotos } from '../data/fotos';
+import { servicos, servicosPorGrupo } from '../data/servicos';
+import { depoimentos } from '../data/depoimentos';
+import { site } from '../data/site';
+
+const tipos = [
+  { nome: 'Corporativos', texto: 'Convenções, lançamentos, treinamentos e confraternizações de empresas.', foto: fotos.painelLed },
+  { nome: 'Congressos e palestras', texto: 'Auditório, som, telão, transmissão e credenciamento para grandes plateias.', foto: fotos.plateiaPalestrante },
+  { nome: 'Feiras e exposições', texto: 'Stands em octanorme, estrutura, iluminação e recepção de visitantes.', foto: fotos.feiraPavilhao },
+  { nome: 'Evangélicos e escolares', texto: 'Cultos, conferências, formaturas e celebrações de escolas.', foto: fotos.auditorioPalco },
+];
+
+const mosaico = [
+  { foto: fotos.palestra, larga: true },
+  { foto: fotos.painelLed },
+  { foto: fotos.auditorioPalco },
+  { foto: fotos.tenda },
+  { foto: fotos.salaoAzul },
+];
+
+const nomesServicos = servicos.map((s) => s.nome);
+---
+
+<Base>
+  <section class="heroi">
+    <div class="heroi__fundo">
+      <Image src={fotos.plateiaPalestrante.src} alt="" widths={[640, 1280, 1800]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
+    </div>
+    <div class="aneis" aria-hidden="true">
+      <span></span><span></span><span></span>
+      <div class="ondas" set:html={simbolo} />
+    </div>
+    <div class="largura">
+      <div class="heroi__conteudo">
+        <p class="sobretitulo">{site.cidade} · desde {site.desde}</p>
+        <h1>Todo o seu evento <em>com uma equipe só.</em></h1>
+        <p class="lead">
+          Som, luz, painel de LED, transmissão, palco, stands, estrutura, credenciamento, equipe e buffet
+          para eventos corporativos, congressos, palestras e feiras. Em Juiz de Fora e em toda Minas.
+        </p>
+        <div class="acoes">
+          <a class="botao" href="/orcamento/">Pedir orçamento</a>
+          <a class="botao botao--contorno" href="/servicos/">Ver serviços</a>
+        </div>
+        <ul class="selos">
+          <li><span class="nota" aria-hidden="true">★★★★★</span><strong>5,0</strong> no Google</li>
+          <li><strong>{new Date().getFullYear() - site.desde}+</strong> anos de eventos</li>
+          <li><strong>{servicos.length}</strong> serviços na mesma proposta</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="rolante" aria-hidden="true">
+    <ul>
+      {[...nomesServicos, ...nomesServicos].map((nome) => <li>{nome}</li>)}
+    </ul>
+  </div>
+
+  <section class="secao" id="servicos">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">O que fazemos</p>
+        <h2>Do primeiro cabo à última cadeira</h2>
+        <p class="lead">Contrate um serviço ou o evento inteiro. A mesma equipe coordena a técnica, a estrutura e as pessoas.</p>
+      </div>
+      <div class="paineis">
+        {servicosPorGrupo.map((grupo, i) => (
+          <article class="painel revela">
+            <Image src={grupo.foto.src} alt="" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 590px" format="webp" />
+            <span class="painel__num">0{i + 1}</span>
+            <h3>{grupo.nome}</h3>
+            <p>{grupo.chamada}</p>
+            <ul>
+              {grupo.servicos.map((s) => (
+                <li><a href={`/servicos/${s.slug}/`}>{s.nome}</a></li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--escura">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Tipos de evento</p>
+        <h2>Do auditório ao pavilhão de feira</h2>
+      </div>
+      <div class="tipos">
+        {tipos.map((t) => (
+          <article class="tipo revela">
+            <Image src={t.foto.src} alt={t.foto.alt} widths={[400, 700]} sizes="(max-width: 900px) 50vw, 290px" format="webp" />
+            <div>
+              <h3>{t.nome}</h3>
+              <p>{t.texto}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--brilho">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Como funciona</p>
+        <h2>Três etapas até o dia do evento</h2>
+      </div>
+      <ol class="passos revela">
+        <li>
+          <h3>Você conta a ideia</h3>
+          <p>Tipo de evento, data, local, público e o que precisa. Pelo WhatsApp ou pelo formulário do site.</p>
+        </li>
+        <li>
+          <h3>Montamos a proposta</h3>
+          <p>Uma proposta só, reunindo os serviços certos para o seu evento, sem vários fornecedores para coordenar.</p>
+        </li>
+        <li>
+          <h3>Executamos</h3>
+          <p>Montagem, operação durante o evento e desmontagem com a nossa equipe, do início ao fim.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao secao--escura">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Eventos</p>
+        <h2>Alguns dos nossos eventos</h2>
+      </div>
+      <div class="mosaico revela">
+        {mosaico.map(({ foto, larga }) => (
+          <figure class={larga ? 'larga' : undefined}>
+            <Image src={foto.src} alt={foto.alt} widths={[420, 640, 900]} sizes={larga ? '(max-width: 900px) 100vw, 790px' : '(max-width: 560px) 100vw, 390px'} format="webp" />
+          </figure>
+        ))}
+      </div>
+      <div class="acoes" style="margin-top: 28px">
+        <a class="botao botao--contorno" href="/eventos/">Ver todas as fotos</a>
+        <a class="botao botao--contorno" href={site.instagram} target="_blank" rel="noopener">Instagram {site.instagramNome}</a>
+      </div>
+    </div>
+  </section>
+
+  <Clientes />
+
+  <section class="secao">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Avaliações no Google</p>
+        <h2>O que dizem de nós</h2>
+      </div>
+      <ul class="cartoes">
+        {depoimentos.map((d) => (
+          <li class="revela">
+            <p class="nota" aria-label="5 estrelas">★★★★★</p>
+            <blockquote>{d.texto}</blockquote>
+            <cite>{d.autor}</cite>
+          </li>
+        ))}
+      </ul>
+      <div class="acoes" style="margin-top: 32px">
+        <a class="botao botao--contorno" href={site.fichaGoogleUrl} target="_blank" rel="noopener">Ver todas no Google</a>
+      </div>
+    </div>
+  </section>
+
+  <BlocoAvaliar />
+  <Chamada />
+</Base>
+
+<script src="../scripts/revela.ts"></script>

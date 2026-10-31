@@ -1,0 +1,15 @@
+---
+interface Props {
+  titulo?: string;
+  href?: string;
+}
+
+const { titulo = 'Conte o que o seu evento precisa.', href = '/orcamento/' } = Astro.props;
+---
+
+<section class="secao chamada nao-imprimir">
+  <div class="largura chamada__linha">
+    <h2>{titulo}</h2>
+    <a class="botao" href={href}>Pedir orçamento</a>
+  </div>
+</section>

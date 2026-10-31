@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base titulo="Avalie a BobSom no Google" descricao="Trabalhou com a BobSom? Aponte a câmera para o QR Code ou toque no botão para deixar sua avaliação no Google.">
+  <section class="secao">
+    <div class="largura avaliar">
+      <div class="nao-imprimir">
+        <p class="sobretitulo">Avaliação</p>
+        <h1>Como foi o seu evento?</h1>
+        <p class="lead" style="margin-block: 20px 28px">
+          Sua avaliação no Google leva menos de um minuto e ajuda outras pessoas a escolher quem cuida do evento delas.
+        </p>
+        <div class="acoes">
+          <a class="botao" href={site.avaliarUrl} target="_blank" rel="noopener">Avaliar no Google</a>
+          <button class="botao botao--contorno so-desktop" type="button" id="imprimir">Imprimir QR Code</button>
+          <a class="botao botao--contorno" href="/img/qr-avaliar.png" download="qr-avaliacao-bobsom.png">Baixar imagem do QR</a>
+        </div>
+      </div>
+      <div class="avaliar__cartao">
+        <img src="/img/logo-original.svg" alt="BobSom Produções" width="240" height="60" />
+        <img src="/img/qr-avaliar.svg" alt="QR Code que abre a avaliação da BobSom no Google" width="316" height="316" />
+        <strong>Avalie a gente no Google</strong>
+        <span class="so-impressao">Aponte a câmera do celular para o código. Obrigado!</span>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelector('#imprimir')?.addEventListener('click', () => window.print());
+</script>

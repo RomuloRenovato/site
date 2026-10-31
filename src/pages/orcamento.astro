@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Heroi from '../components/Heroi.astro';
+import { fotos } from '../data/fotos';
+import { servicos } from '../data/servicos';
+import { linkWhatsApp, site, tiposDeEvento } from '../data/site';
+---
+
+<Base titulo="Pedir orçamento" descricao="Peça um orçamento para o seu evento em Juiz de Fora e região. Preencha os dados e envie direto pelo WhatsApp da BobSom.">
+  <Heroi
+    sobretitulo="Orçamento"
+    titulo="Conte sobre o seu evento"
+    lead="Preencha o que já souber. A mensagem abre pronta no WhatsApp, e é só enviar."
+    foto={fotos.transmissaoCamera}
+  />
+
+  <section class="secao">
+    <div class="largura">
+      <form class="formulario" id="orcamento" data-telefone={site.telefoneE164.replace('+', '')}>
+        <div class="campo">
+          <label for="nome">Seu nome</label>
+          <input id="nome" name="Nome" required autocomplete="name" />
+        </div>
+        <div class="campo">
+          <label for="tipo">Tipo de evento</label>
+          <select id="tipo" name="Tipo de evento" required>
+            <option value="">Selecione</option>
+            {tiposDeEvento.map((tipo) => <option>{tipo}</option>)}
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="data">Data <small>(se já tiver)</small></label>
+          <input id="data" name="Data" type="date" />
+        </div>
+        <div class="campo">
+          <label for="local">Cidade e local</label>
+          <input id="local" name="Local" required />
+        </div>
+        <div class="campo">
+          <label for="publico">Público estimado <small>(pessoas)</small></label>
+          <input id="publico" name="Público estimado" type="number" min="1" inputmode="numeric" />
+        </div>
+
+        <fieldset>
+          <legend>Do que você precisa?</legend>
+          <div class="opcoes">
+            {servicos.map((s) => (
+              <label><input type="checkbox" name="servico" value={s.slug} data-nome={s.nome} /> {s.nome}</label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="campo campo--inteiro">
+          <label for="detalhes">Mais detalhes <small>(opcional)</small></label>
+          <textarea id="detalhes" name="Detalhes"></textarea>
+        </div>
+
+        <button class="botao" type="submit">Enviar pelo WhatsApp</button>
+        <p class="aviso">
+          Nada fica salvo neste site: os dados vão só na mensagem que você envia. Prefere conversar direto?
+          <a href={linkWhatsApp('Olá, BobSom! Gostaria de um orçamento para um evento.')} target="_blank" rel="noopener">Chame no {site.telefone}</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#orcamento');
+  if (form) {
+    const caixas = form.querySelectorAll<HTMLInputElement>('input[name="servico"]');
+
+    const pedido = new URLSearchParams(location.search).get('servico');
+    caixas.forEach((c) => {
+      if (c.value === pedido) c.checked = true;
+    });
+
+    const formatarData = (iso: string) => iso.split('-').reverse().join('/');
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault();
+      const linhas = ['Olá, BobSom! Gostaria de um orçamento.', ''];
+      form.querySelectorAll<HTMLInputElement>('input:not([type="checkbox"]), select, textarea').forEach((campo) => {
+        const valor = campo.value.trim();
+        if (valor) linhas.push(`${campo.name}: ${campo.type === 'date' ? formatarData(valor) : valor}`);
+      });
+      const escolhidos = [...caixas].filter((c) => c.checked).map((c) => c.dataset.nome);
+      if (escolhidos.length) linhas.push(`Serviços: ${escolhidos.join(', ')}`);
+      const url = `https://wa.me/${form.dataset.telefone}?text=${encodeURIComponent(linhas.join('\n'))}`;
+      window.open(url, '_blank', 'noopener') ?? (location.href = url);
+    });
+  }
+</script>

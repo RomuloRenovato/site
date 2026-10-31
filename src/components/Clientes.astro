@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import { clientes } from '../data/clientes';
+---
+
+{
+  clientes.length > 0 && (
+    <section class="secao" id="clientes">
+      <div class="largura">
+        <div class="cabeca revela">
+          <p class="sobretitulo">Quem já confiou</p>
+          <h2>Empresas e instituições que já atendemos</h2>
+        </div>
+        <ul class="clientes revela">
+          {clientes.map((c) => (
+            <li>
+              {c.imagem && (
+                <Image src={c.imagem} alt={c.imagemAlt ?? c.nome} widths={[400, 800]} sizes="(max-width: 900px) 100vw, 380px" format="webp" />
+              )}
+              <strong>{c.nome}</strong>
+              <span>{[c.cidade, c.ano, c.servicos].filter(Boolean).join(' · ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

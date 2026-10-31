@@ -1,0 +1,79 @@
+---
+import Base from '../../layouts/Base.astro';
+import Chamada from '../../components/Chamada.astro';
+import Heroi from '../../components/Heroi.astro';
+import { grupos, servicos, type Servico } from '../../data/servicos';
+import { tiposDeEvento } from '../../data/site';
+
+export function getStaticPaths() {
+  return servicos.map((servico) => ({ params: { slug: servico.slug }, props: { servico } }));
+}
+
+interface Props {
+  servico: Servico;
+}
+
+const { servico } = Astro.props;
+const relacionados = servicos.filter((s) => s.slug !== servico.slug && s.grupo === servico.grupo).slice(0, 4);
+const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
+---
+
+<Base titulo={servico.titulo} descricao={`${servico.resumo} ${servico.texto}`.slice(0, 158)}>
+  <Heroi
+    sobretitulo={grupos[servico.grupo].nome}
+    titulo={servico.titulo}
+    lead={servico.resumo}
+    foto={servico.foto}
+    voltar={{ href: '/servicos/', rotulo: 'Todos os serviços' }}
+  >
+    <div class="acoes">
+      <a class="botao" href={linkOrcamento}>Pedir orçamento</a>
+    </div>
+  </Heroi>
+
+  <section class="secao">
+    <div class="largura duas-colunas">
+      <div class="texto revela">
+        <h2>Como funciona</h2>
+        <p>{servico.texto}</p>
+      </div>
+      <div class="revela">
+        <h2>O que inclui</h2>
+        <ul class="marcadores">
+          {servico.itens.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--brilho">
+    <div class="largura duas-colunas">
+      <div class="revela">
+        <h2>Para quais eventos</h2>
+        <ul class="etiquetas">
+          {tiposDeEvento.map((tipo) => <li>{tipo}</li>)}
+        </ul>
+      </div>
+      {relacionados.length > 0 && (
+        <div class="revela">
+          <h2>Combina com</h2>
+          <ul class="lista-servicos">
+            {relacionados.map((s) => (
+              <li>
+                <a href={`/servicos/${s.slug}/`}>
+                  <strong>{s.nome}</strong>
+                  <span>{s.resumo}</span>
+                  <i aria-hidden="true">→</i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Chamada titulo={`Precisa de ${servico.nome.toLowerCase()}?`} href={linkOrcamento} />
+</Base>
+
+<script src="../../scripts/revela.ts"></script>

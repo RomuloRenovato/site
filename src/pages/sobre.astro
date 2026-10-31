@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Chamada from '../components/Chamada.astro';
+import Heroi from '../components/Heroi.astro';
+import { fotos } from '../data/fotos';
+import { servicos } from '../data/servicos';
+import { site, tiposDeEvento } from '../data/site';
+---
+
+<Base titulo="Sobre a empresa" descricao={`A BobSom produz eventos em ${site.cidade} desde ${site.desde}, com som, luz, audiovisual, estrutura, equipe e buffet.`}>
+  <Heroi
+    sobretitulo="Sobre"
+    titulo={`Eventos em Juiz de Fora desde ${site.desde}`}
+    lead="Uma empresa de produção de eventos que cuida da técnica, da estrutura e das pessoas."
+    foto={fotos.palestra}
+  >
+    <ul class="selos">
+      <li><span class="nota" aria-hidden="true">★★★★★</span><strong>5,0</strong> no Google</li>
+      <li><strong>{new Date().getFullYear() - site.desde}+</strong> anos de eventos</li>
+      <li><strong>{servicos.length}</strong> serviços na mesma proposta</li>
+    </ul>
+  </Heroi>
+
+  <section class="secao">
+    <div class="largura duas-colunas">
+      <div class="texto revela">
+        <h2>Uma equipe, o evento inteiro</h2>
+        <p>
+          Desde {site.desde}, a BobSom atende eventos corporativos, congressos, palestras, feiras, eventos
+          evangélicos e escolares. Reúne audiovisual, sonorização, iluminação, estruturas em octanorme,
+          palco, mobiliário, credenciamento, equipe e buffet.
+        </p>
+        <p>
+          Isso simplifica a vida de quem organiza: em vez de coordenar vários fornecedores, você fala
+          com uma equipe só, que conhece todas as etapas da montagem.
+        </p>
+      </div>
+      <div class="revela">
+        <h2>Onde atuamos</h2>
+        <p class="lead" style="margin-bottom: 20px">
+          Nossa base é em {site.cidade}, e já levamos a operação completa para outras cidades de Minas Gerais.
+        </p>
+        <ul class="etiquetas">
+          {site.regioes.map((cidade) => <li>{cidade}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--brilho">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Como trabalhamos</p>
+        <h2>Três etapas até o dia do evento</h2>
+      </div>
+      <ol class="passos revela">
+        <li>
+          <h3>Você conta a ideia</h3>
+          <p>Tipo de evento, data, local, público e o que precisa. Pelo WhatsApp ou pelo formulário.</p>
+        </li>
+        <li>
+          <h3>Montamos a proposta</h3>
+          <p>Uma proposta só, com os serviços certos para o seu evento.</p>
+        </li>
+        <li>
+          <h3>Executamos</h3>
+          <p>Montagem, operação durante o evento e desmontagem com a nossa equipe.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao secao--escura">
+    <div class="largura duas-colunas">
+      <div class="revela">
+        <p class="sobretitulo">Tipos de evento</p>
+        <h2 style="margin-bottom: 20px">Para quem fazemos</h2>
+        <ul class="etiquetas">
+          {tiposDeEvento.map((tipo) => <li>{tipo}</li>)}
+        </ul>
+      </div>
+      <figure class="revela" style="margin: 0">
+        <Image src={fotos.painelLed.src} alt={fotos.painelLed.alt} widths={[480, 800]} sizes="(max-width: 900px) 100vw, 540px" format="webp" style="border-radius: var(--raio)" />
+      </figure>
+    </div>
+  </section>
+
+  <Chamada />
+</Base>
+
+<script src="../scripts/revela.ts"></script>

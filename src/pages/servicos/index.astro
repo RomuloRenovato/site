@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Chamada from '../../components/Chamada.astro';
+import Heroi from '../../components/Heroi.astro';
+import { fotos } from '../../data/fotos';
+import { servicos, servicosPorGrupo } from '../../data/servicos';
+---
+
+<Base
+  titulo="Serviços para eventos em Juiz de Fora"
+  descricao={`Os ${servicos.length} serviços da BobSom para eventos: produção, som, luz, LED, transmissão, palco, stands, tendas, mobiliário, credenciamento, equipe e buffet.`}
+>
+  <Heroi
+    sobretitulo="Serviços"
+    titulo="Tudo o que um evento precisa"
+    lead="Contrate um serviço ou o evento inteiro. A proposta reúne o que você escolher, com a mesma equipe coordenando."
+    foto={fotos.plateiaTelao}
+  />
+
+  <section class="secao">
+    <div class="largura">
+      <div class="paineis">
+        {servicosPorGrupo.map((grupo, i) => (
+          <article class="painel revela">
+            <Image src={grupo.foto.src} alt="" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 590px" format="webp" />
+            <span class="painel__num">0{i + 1}</span>
+            <h2 style="font-size: 1.4rem; margin-bottom: 8px">{grupo.nome}</h2>
+            <p>{grupo.chamada}</p>
+            <ul>
+              {grupo.servicos.map((s) => (
+                <li><a href={`/servicos/${s.slug}/`}>{s.nome}</a></li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--escura">
+    <div class="largura">
+      <div class="cabeca revela">
+        <p class="sobretitulo">Lista completa</p>
+        <h2>Os {servicos.length} serviços, um a um</h2>
+      </div>
+      {servicosPorGrupo.map((grupo) => (
+        <div class="grupo revela">
+          <div>
+            <h3 style="color: var(--azul); margin-bottom: 10px">{grupo.nome}</h3>
+            <p>{grupo.chamada}</p>
+          </div>
+          <ul class="lista-servicos">
+            {grupo.servicos.map((s) => (
+              <li>
+                <a href={`/servicos/${s.slug}/`}>
+                  <strong>{s.nome}</strong>
+                  <span>{s.resumo}</span>
+                  <i aria-hidden="true">→</i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <Chamada />
+</Base>
+
+<script src="../../scripts/revela.ts"></script>

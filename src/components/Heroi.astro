@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import simbolo from '../assets/simbolo.svg?raw';
+import type { Foto } from '../data/fotos';
+
+interface Props {
+  sobretitulo: string;
+  titulo: string;
+  lead?: string;
+  foto?: Foto;
+  voltar?: { href: string; rotulo: string };
+}
+
+const { sobretitulo, titulo, lead, foto, voltar } = Astro.props;
+---
+
+<section class="heroi heroi--interno">
+  {foto && (
+    <div class="heroi__fundo">
+      <Image src={foto.src} alt="" widths={[640, 1280]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
+    </div>
+  )}
+  <div class="aneis" aria-hidden="true">
+    <span></span><span></span><span></span>
+    <div class="ondas" set:html={simbolo} />
+  </div>
+  <div class="largura">
+    <div class="heroi__conteudo">
+      {voltar && <a class="migalha" href={voltar.href}>← {voltar.rotulo}</a>}
+      <p class="sobretitulo">{sobretitulo}</p>
+      <h1>{titulo}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      <slot />
+    </div>
+  </div>
+</section>

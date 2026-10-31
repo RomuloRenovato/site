@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="secao secao--escura">
+  <div class="largura qr">
+    <div>
+      <p class="sobretitulo">Avaliações</p>
+      <h2>Trabalhou com a gente? Conte como foi.</h2>
+      <p class="lead">
+        <span class="so-desktop">Aponte a câmera do celular para o QR Code ou use o botão.</span>
+        Sua avaliação no Google leva menos de um minuto e ajuda outras pessoas a escolher.
+      </p>
+      <div class="acoes">
+        <a class="botao" href={site.avaliarUrl} target="_blank" rel="noopener">Avaliar no Google</a>
+        <a class="botao botao--contorno" href="/avaliar/">Abrir QR Code para imprimir</a>
+      </div>
+    </div>
+    <div class="qr__imagem so-desktop">
+      <img src="/img/qr-avaliar.svg" alt="QR Code que abre a avaliação da BobSom no Google" width="260" height="260" loading="lazy" />
+    </div>
+  </div>
+</section>
