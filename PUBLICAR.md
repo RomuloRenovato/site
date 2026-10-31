@@ -1,55 +1,44 @@
 # Como colocar o site no ar
 
-Siga nesta ordem. Nenhuma senha vai para o repositório.
+O site é publicado no **GitHub Pages** a partir do repositório `RomuloRenovato/site`: a cada push na `main`, o workflow em `.github/workflows/deploy.yml` compila o Astro e publica a pasta `dist`. O arquivo `public/CNAME` mantém o domínio bobsom.com.
 
 ## 1. Regularizar o domínio
 
-Em 31/10/2026, o bobsom.com estava com os nameservers `NS1/NS2.VERIFICATION-HOLD.SUSPENDED-DOMAIN.COM`. Isso indica suspensão por verificação pendente, normalmente do e-mail do titular. Registrador: PublicDomainRegistry, com expiração em 06/04/2027.
+Em 31/10/2026, o bobsom.com estava com os nameservers `NS1/NS2.VERIFICATION-HOLD.SUSPENDED-DOMAIN.COM`: suspensão por verificação pendente do e-mail do titular (registro feito pela HostGator/PublicDomainRegistry em 06/04/2026, vence em 06/04/2027). Enquanto isso não for resolvido, o domínio não abre em lugar nenhum.
 
-1. Confirme que o domínio é da BobSom ou seu, procurando a compra no painel da HostGator.
-2. Procure o e-mail de verificação (inclusive no spam) ou peça o reenvio ao suporte de onde ele foi registrado.
-3. Se o domínio não for de vocês, escolha outro e troque `site` em `astro.config.mjs`, `public/robots.txt` e `public/.htaccess`.
+1. No Portal do Cliente da HostGator, procure o aviso de verificação do domínio e reenvie o e-mail, ou abra um chamado.
+2. Confirme o e-mail de verificação (olhe o spam).
+3. Depois que os nameservers voltarem aos da HostGator, configure o DNS do passo 3.
 
-## 2. Preparar a HostGator
+## 2. GitHub Pages
 
-1. Confirme no plano que bobsom.com é o domínio principal e que o site será servido a partir de `public_html`. Se ele for um domínio adicional, a pasta será outra: use essa pasta no passo 3.
-2. Aponte os nameservers do domínio para os indicados no painel da HostGator.
-3. Ative o SSL do domínio no cPanel e espere o certificado sair. O `.htaccess` força HTTPS: sem SSL, o site não abre.
-4. Em cPanel > Contas FTP, crie uma conta com o diretório `public_html` como raiz.
+Em **Settings > Pages** do repositório:
 
-## 3. Criar o repositório no GitHub
+- **Source:** GitHub Actions (não "Deploy from a branch").
+- **Custom domain:** bobsom.com.
+- **Enforce HTTPS:** ligar assim que o DNS estiver certo (o GitHub emite o certificado sozinho).
 
-Crie um repositório vazio e, nesta pasta, rode os comandos abaixo trocando `SEU-USUARIO`:
+## 3. DNS (Zone Editor do cPanel, ou onde estiver a zona do domínio)
 
-```bash
-git add .
-```
+| Tipo | Nome | Valor |
+| --- | --- | --- |
+| A | bobsom.com | 185.199.108.153 |
+| A | bobsom.com | 185.199.109.153 |
+| A | bobsom.com | 185.199.110.153 |
+| A | bobsom.com | 185.199.111.153 |
+| CNAME | www | romulorenovato.github.io |
 
-```bash
-git commit -m "Primeira versão do site"
-```
+Remova qualquer registro A antigo de `bobsom.com` apontando para a HostGator (69.6.248.131). Os registros de e-mail (MX) ficam como estão.
 
-```bash
-git remote add origin https://github.com/SEU-USUARIO/bobsom-site.git
-```
-
-Antes do push, em **Settings > Secrets and variables > Actions**, cadastre:
-
-| Secret | Valor |
-| --- | --- |
-| `FTP_SERVER` | Servidor FTP indicado no cPanel |
-| `FTP_USERNAME` | Usuário completo da conta FTP |
-| `FTP_PASSWORD` | Senha da conta FTP |
-
-Depois publique:
+## 4. Publicar
 
 ```bash
-git push -u origin main
+git push --force -u origin main
 ```
 
-A aba **Actions** mostra o andamento. A partir daí, cada push na `main` atualiza o site. Se o FTPS falhar por causa do certificado do servidor, troque `protocol: ftps` por `protocol: ftp` em `.github/workflows/deploy.yml` só se o suporte confirmar que não há outra opção.
+A aba **Actions** mostra o andamento. O primeiro deploy leva uns 2 minutos; enquanto o DNS não estiver pronto, o site já fica acessível em https://romulorenovato.github.io/site/ só se o domínio personalizado for removido, então o teste real é pelo bobsom.com.
 
-## 4. Depois de no ar
+## 5. Depois de no ar
 
 - Em Google Business Profile, preencha o site da ficha com https://bobsom.com.
 - Cadastre o sitemap `https://bobsom.com/sitemap-index.xml` no Google Search Console.
@@ -62,7 +51,7 @@ A aba **Actions** mostra o andamento. A partir daí, cada push na `main` atualiz
 - **Fotos ilustrativas** (marcadas com `ilustrativa: true` em `src/data/fotos.ts`): `plateia-palestrante`, `plateia-conferencia`, `plateia-telao`, `transmissao-camera`, `iluminacao-varas`, `iluminacao-palco`, `feira-pavilhao` e `credenciamento-mesas` são do Unsplash (licença livre para uso comercial, sem atribuição). **Não são eventos da BobSom** e por isso não entram na galeria "nossos eventos"; aparecem só como fundo e ilustração dos serviços. Troque pelas fotos originais da empresa assim que tiver, principalmente a da abertura (`plateia-palestrante`).
 - **Depoimentos**, em `src/data/depoimentos.ts`. São trechos reais do Google, com nome abreviado.
 - **Facebook**: preencher `facebook` em `src/data/site.ts` com o endereço da página. Enquanto estiver vazio, o link não aparece.
-- **Nota no Google**: "5,0" e "mais de 60 avaliações" são texto fixo em `src/pages/index.astro`. Atualize se mudarem.
+- **Nota no Google**: "5,0" é texto fixo em `src/pages/index.astro`. Atualize se mudar.
 
 ## Como atualizar
 
