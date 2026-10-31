@@ -38,10 +38,11 @@ git push --force -u origin main
 
 A aba **Actions** mostra o andamento. O primeiro deploy leva uns 2 minutos; enquanto o DNS não estiver pronto, o site já fica acessível em https://romulorenovato.github.io/site/ só se o domínio personalizado for removido, então o teste real é pelo bobsom.com.
 
-## 5. Depois de no ar
+## 5. Depois de no ar (feito em 31/10/2026)
 
-- Em Google Business Profile, preencha o site da ficha com https://bobsom.com.
-- Cadastre o sitemap `https://bobsom.com/sitemap-index.xml` no Google Search Console.
+- Google Business Profile: site https://bobsom.com e Instagram @bobsom.jf cadastrados (ficam "pendentes" até a revisão do Google, normalmente 10 minutos).
+- Search Console: propriedade de domínio `bobsom.com` verificada por TXT no DNS (registro `google-site-verification=...` na zona: não remover) e sitemap `https://bobsom.com/sitemap-index.xml` enviado. Se a primeira leitura mostrar 0 páginas, reenvie o sitemap depois que o HTTPS estiver ativo.
+- Falta: quando o GitHub emitir o certificado, marcar **Enforce HTTPS** em Settings > Pages.
 - Aponte a câmera para o QR de `/avaliar/` e confira se abre a avaliação da BobSom.
 
 ## O que revisar com a BobSom
