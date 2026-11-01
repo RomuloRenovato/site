@@ -1,48 +1,43 @@
 # Como colocar o site no ar
 
-O site é publicado no **GitHub Pages** a partir do repositório `RomuloRenovato/site`: a cada push na `main`, o workflow em `.github/workflows/deploy.yml` compila o Astro e publica a pasta `dist`. O arquivo `public/CNAME` mantém o domínio bobsom.com.
+O site fica hospedado na **HostGator** (plano P, cPanel `romul670`, servidor `sh00224.hostgator.com.br`), na pasta `public_html`. O código mora no repositório `RomuloRenovato/site`: a cada push na `main`, o workflow em `.github/workflows/deploy.yml` compila o Astro e envia a pasta `dist` por FTPS. O `public/.htaccess` força HTTPS e tira o `www`.
 
-## 1. Regularizar o domínio
+Histórico: em 31/10/2026 o site foi ao ar pelo GitHub Pages, mas o certificado do GitHub ficou preso num cache de DNS (o domínio tinha acabado de sair de uma suspensão por verificação do titular). Em 01/11/2026 a hospedagem voltou para a HostGator, que já tinha AutoSSL para os subdomínios.
 
-Em 31/10/2026, o bobsom.com estava com os nameservers `NS1/NS2.VERIFICATION-HOLD.SUSPENDED-DOMAIN.COM`: suspensão por verificação pendente do e-mail do titular (registro feito pela HostGator/PublicDomainRegistry em 06/04/2026, vence em 06/04/2027). Enquanto isso não for resolvido, o domínio não abre em lugar nenhum.
-
-1. No Portal do Cliente da HostGator, procure o aviso de verificação do domínio e reenvie o e-mail, ou abra um chamado.
-2. Confirme o e-mail de verificação (olhe o spam).
-3. Depois que os nameservers voltarem aos da HostGator, configure o DNS do passo 3.
-
-## 2. GitHub Pages
-
-Em **Settings > Pages** do repositório:
-
-- **Source:** GitHub Actions (não "Deploy from a branch").
-- **Custom domain:** bobsom.com.
-- **Enforce HTTPS:** ligar assim que o DNS estiver certo (o GitHub emite o certificado sozinho).
-
-## 3. DNS (Zone Editor do cPanel, ou onde estiver a zona do domínio)
+## 1. DNS (Zone Editor do cPanel)
 
 | Tipo | Nome | Valor |
 | --- | --- | --- |
-| A | bobsom.com | 185.199.108.153 |
-| A | bobsom.com | 185.199.109.153 |
-| A | bobsom.com | 185.199.110.153 |
-| A | bobsom.com | 185.199.111.153 |
-| CNAME | www | romulorenovato.github.io |
+| A | bobsom.com | 69.6.248.131 (IP compartilhado do plano) |
+| CNAME | www | bobsom.com |
 
-Remova qualquer registro A antigo de `bobsom.com` apontando para a HostGator (69.6.248.131). Os registros de e-mail (MX) ficam como estão.
+Os registros de e-mail (MX/SPF/DKIM do Titan), o TXT `google-site-verification=...` e o `_acme-challenge` do AutoSSL ficam como estão. Feito em 01/11/2026.
 
-## 4. Publicar
+## 2. Certificado
+
+Em cPanel > **SSL/TLS Status**, marque `bobsom.com` e clique em **Run AutoSSL**. Os subdomínios (`www`, `mail`, `cpanel`...) já tinham certificado; o do domínio raiz só pôde ser emitido depois que o A voltou para a HostGator. Renova sozinho.
+
+## 3. Primeira publicação (feita à mão em 01/11/2026)
+
+`npm run build`, zip da pasta `dist` (incluindo o `.htaccess`), upload pelo **Gerenciador de arquivos** do cPanel em `public_html` e **Extrair**. Sirva só para o primeiro envio; depois disso, o push cuida.
+
+## 4. Publicação automática (FTP)
+
+1. cPanel > **Contas de FTP**: crie uma conta (ex.: `site@bobsom.com`) com o diretório `public_html` como raiz.
+2. No GitHub, em `RomuloRenovato/site` > Settings > Secrets and variables > Actions, cadastre `FTP_SERVER` (`bobsom.com` ou `69.6.248.123`, o "Hostname FTP" do Portal do Cliente), `FTP_USERNAME` e `FTP_PASSWORD`.
+3. Push na `main`. A aba **Actions** mostra o envio; o action só manda o que mudou.
 
 ```bash
-git push --force -u origin main
+git push -u origin main
 ```
 
-A aba **Actions** mostra o andamento. O primeiro deploy leva uns 2 minutos; enquanto o DNS não estiver pronto, o site já fica acessível em https://romulorenovato.github.io/site/ só se o domínio personalizado for removido, então o teste real é pelo bobsom.com.
+Só a conta `RomuloRenovato` tem acesso ao repositório.
 
 ## 5. Depois de no ar (feito em 31/10/2026)
 
 - Google Business Profile: site https://bobsom.com e Instagram @bobsom.jf cadastrados (ficam "pendentes" até a revisão do Google, normalmente 10 minutos).
 - Search Console: propriedade de domínio `bobsom.com` verificada por TXT no DNS (registro `google-site-verification=...` na zona: não remover) e sitemap `https://bobsom.com/sitemap-index.xml` enviado. Se a primeira leitura mostrar 0 páginas, reenvie o sitemap depois que o HTTPS estiver ativo.
-- Falta: quando o GitHub emitir o certificado, marcar **Enforce HTTPS** em Settings > Pages.
+- O repositório `RomuloRenovato/site` ainda tem o GitHub Pages ligado com o domínio bobsom.com; pode ser desligado em Settings > Pages (**Unpublish site**), já que o DNS não aponta mais para lá.
 - Aponte a câmera para o QR de `/avaliar/` e confira se abre a avaliação da BobSom.
 
 ## O que revisar com a BobSom
