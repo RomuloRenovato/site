@@ -599,8 +599,8 @@ p {
 .mosaico figcaption {
   position: absolute;
   inset: auto 0 0 0;
-  padding: 48px 16px 14px;
-  background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.75) 45%, rgb(0 0 0 / 0.92));
+  padding: 56px 16px 14px;
+  background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.85) 45%, rgb(0 0 0 / 0.96));
   color: var(--suave);
   font-size: 0.85rem;
   line-height: 1.4;

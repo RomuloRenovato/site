@@ -18,7 +18,7 @@
 
 .heroi__fundo img {
   object-fit: cover;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .heroi__fundo::after {
@@ -26,20 +26,17 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(0 0 0 / 0.95) 0%, rgb(0 0 0 / 0.85) 45%, rgb(0 0 0 / 0.35) 100%),
+    linear-gradient(90deg, rgb(0 0 0 / 0.97) 0%, rgb(0 0 0 / 0.9) 50%, rgb(0 0 0 / 0.45) 100%),
     linear-gradient(180deg, rgb(0 0 0 / 0.25) 0%, transparent 35%, var(--preto) 100%);
 }
 
 /* Texto sobre foto: sempre com sombra, para não depender só do véu. */
 .heroi__conteudo,
-.painel > :not(img),
-.tipo div,
 .mosaico figcaption {
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.75), 0 0 14px rgb(0 0 0 / 0.5);
 }
 
-.heroi__conteudo .botao,
-.painel .botao {
+.heroi__conteudo .botao {
   text-shadow: none;
 }
 
@@ -82,7 +79,7 @@
   color: #d5d7da;
 }
 
-/* Painéis de serviços com foto */
+/* Painéis de serviços: foto em cima, texto embaixo em fundo sólido (nunca sobre a foto) */
 .paineis {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -90,12 +87,8 @@
 }
 
 .painel {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 420px;
-  padding: 30px;
   overflow: hidden;
   border: 1px solid var(--linha);
   border-radius: var(--raio);
@@ -103,34 +96,24 @@
 }
 
 .painel > img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  filter: brightness(0.85);
-}
-
-.painel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.5) 25%, rgb(0 0 0 / 0.9) 45%, rgb(0 0 0 / 0.97) 100%);
 }
 
 .painel > :not(img) {
-  position: relative;
+  text-shadow: none;
 }
 
 .painel h3,
 .painel h2 {
-  margin-bottom: 8px;
+  margin: 26px 28px 8px;
   font-size: 1.4rem;
 }
 
 .painel p {
-  max-width: 44ch;
-  margin-bottom: 18px;
+  max-width: 48ch;
+  margin: 0 28px 18px;
   color: #cfd2d6;
 }
 
@@ -138,7 +121,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 0;
+  margin: auto 28px 28px;
   padding: 0;
   list-style: none;
 }
@@ -148,10 +131,9 @@
   align-items: center;
   min-height: 40px;
   padding: 7px 15px;
-  border: 1px solid rgb(255 255 255 / 0.28);
+  border: 1px solid var(--linha);
   border-radius: var(--raio);
-  background: rgb(0 0 0 / 0.65);
-  text-shadow: none;
+  background: var(--preto);
   color: var(--texto);
   font-size: 0.93rem;
   font-weight: 600;
@@ -164,7 +146,7 @@
   color: var(--azul);
 }
 
-/* Tipos de evento */
+/* Tipos de evento: foto em cima, texto embaixo */
 .tipos {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -172,32 +154,23 @@
 }
 
 .tipo {
-  position: relative;
-  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  border: 1px solid var(--linha);
   border-radius: var(--raio);
   background: var(--painel);
 }
 
 .tipo img {
-  position: absolute;
-  inset: 0;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.tipo::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.05) 0%, rgb(0 0 0 / 0.35) 40%, rgb(0 0 0 / 0.9) 70%, rgb(0 0 0 / 0.97) 100%);
-}
-
 .tipo div {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 22px;
+  padding: 20px 22px 22px;
+  text-shadow: none;
 }
 
 .tipo h3 {
@@ -217,13 +190,14 @@
   .paineis {
     grid-template-columns: minmax(0, 1fr);
   }
-  .painel {
-    min-height: 360px;
-    padding: 22px;
+  .painel h3,
+  .painel h2,
+  .painel p,
+  .painel ul {
+    margin-inline: 20px;
   }
-  /* No celular o texto sobe mais na foto: escurece a imagem inteira. */
-  .painel > img {
-    filter: brightness(0.6);
+  .painel ul {
+    margin-bottom: 20px;
   }
   .tipos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
