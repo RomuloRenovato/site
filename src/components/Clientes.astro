@@ -7,11 +7,10 @@ import { clientes } from '../data/clientes';
   clientes.length > 0 && (
     <section class="secao" id="clientes">
       <div class="largura">
-        <div class="cabeca revela">
-          <p class="sobretitulo">Quem já confiou</p>
-          <h2>Empresas e instituições que já atendemos</h2>
+        <div class="cabeca">
+          <h2>Clientes</h2>
         </div>
-        <ul class="clientes revela">
+        <ul class="clientes">
           {clientes.map((c) => (
             <li>
               {c.imagem && (

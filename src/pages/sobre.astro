@@ -4,7 +4,6 @@ import Base from '../layouts/Base.astro';
 import Chamada from '../components/Chamada.astro';
 import Heroi from '../components/Heroi.astro';
 import { fotos } from '../data/fotos';
-import { servicos } from '../data/servicos';
 import { site, tiposDeEvento } from '../data/site';
 ---
 
@@ -14,17 +13,11 @@ import { site, tiposDeEvento } from '../data/site';
     titulo={`Eventos em Juiz de Fora desde ${site.desde}`}
     lead="Uma empresa de produção de eventos que cuida da técnica, da estrutura e das pessoas."
     foto={fotos.palestra}
-  >
-    <ul class="selos">
-      <li><span class="nota" aria-hidden="true">★★★★★</span><strong>5,0</strong> no Google</li>
-      <li><strong>{new Date().getFullYear() - site.desde}+</strong> anos de eventos</li>
-      <li><strong>{servicos.length}</strong> serviços na mesma proposta</li>
-    </ul>
-  </Heroi>
+  />
 
   <section class="secao">
     <div class="largura duas-colunas">
-      <div class="texto revela">
+      <div class="texto">
         <h2>Uma equipe, o evento inteiro</h2>
         <p>
           Desde {site.desde}, a BobSom atende eventos corporativos, congressos, palestras, feiras, eventos
@@ -36,7 +29,7 @@ import { site, tiposDeEvento } from '../data/site';
           com uma equipe só, que conhece todas as etapas da montagem.
         </p>
       </div>
-      <div class="revela">
+      <div>
         <h2>Onde atuamos</h2>
         <p class="lead" style="margin-bottom: 20px">
           Nossa base é em {site.cidade}, e já levamos a operação completa para outras cidades de Minas Gerais.
@@ -48,13 +41,12 @@ import { site, tiposDeEvento } from '../data/site';
     </div>
   </section>
 
-  <section class="secao secao--brilho">
+  <section class="secao">
     <div class="largura">
-      <div class="cabeca revela">
-        <p class="sobretitulo">Como trabalhamos</p>
-        <h2>Três etapas até o dia do evento</h2>
+      <div class="cabeca">
+        <h2>Como trabalhamos</h2>
       </div>
-      <ol class="passos revela">
+      <ol class="passos">
         <li>
           <h3>Você conta a ideia</h3>
           <p>Tipo de evento, data, local, público e o que precisa. Pelo WhatsApp ou pelo formulário.</p>
@@ -73,14 +65,13 @@ import { site, tiposDeEvento } from '../data/site';
 
   <section class="secao secao--escura">
     <div class="largura duas-colunas">
-      <div class="revela">
-        <p class="sobretitulo">Tipos de evento</p>
-        <h2 style="margin-bottom: 20px">Para quem fazemos</h2>
+      <div>
+        <h2 style="margin-bottom: 20px">Tipos de evento</h2>
         <ul class="etiquetas">
           {tiposDeEvento.map((tipo) => <li>{tipo}</li>)}
         </ul>
       </div>
-      <figure class="revela" style="margin: 0">
+      <figure style="margin: 0">
         <Image src={fotos.painelLed.src} alt={fotos.painelLed.alt} widths={[480, 800]} sizes="(max-width: 900px) 100vw, 540px" format="webp" style="border-radius: var(--raio)" />
       </figure>
     </div>
@@ -89,4 +80,3 @@ import { site, tiposDeEvento } from '../data/site';
   <Chamada />
 </Base>
 
-<script src="../scripts/revela.ts"></script>

@@ -1,15 +1,22 @@
 ---
+import Icone from './Icone.astro';
+import { site, linkWhatsApp } from '../data/site';
+
 interface Props {
   titulo?: string;
   href?: string;
 }
 
-const { titulo = 'Conte o que o seu evento precisa.', href = '/orcamento/' } = Astro.props;
+const { titulo = 'Vamos conversar sobre o seu evento?', href = '/orcamento/' } = Astro.props;
+const whatsapp = linkWhatsApp('Olá, BobSom! Vim pelo site e gostaria de falar sobre um evento.');
 ---
 
 <section class="secao chamada nao-imprimir">
   <div class="largura chamada__linha">
     <h2>{titulo}</h2>
-    <a class="botao" href={href}>Pedir orçamento</a>
+    <div class="acoes">
+      <a class="botao" href={href}>Pedir orçamento</a>
+      <a class="botao botao--contorno" href={whatsapp} target="_blank" rel="noopener"><Icone nome="whatsapp" /> {site.telefone}</a>
+    </div>
   </div>
 </section>

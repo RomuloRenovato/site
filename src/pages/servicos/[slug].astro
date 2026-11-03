@@ -33,11 +33,11 @@ const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
 
   <section class="secao">
     <div class="largura duas-colunas">
-      <div class="texto revela">
+      <div class="texto">
         <h2>Como funciona</h2>
         <p>{servico.texto}</p>
       </div>
-      <div class="revela">
+      <div>
         <h2>O que inclui</h2>
         <ul class="marcadores">
           {servico.itens.map((item) => <li>{item}</li>)}
@@ -46,16 +46,16 @@ const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
     </div>
   </section>
 
-  <section class="secao secao--brilho">
+  <section class="secao">
     <div class="largura duas-colunas">
-      <div class="revela">
+      <div>
         <h2>Para quais eventos</h2>
         <ul class="etiquetas">
           {tiposDeEvento.map((tipo) => <li>{tipo}</li>)}
         </ul>
       </div>
       {relacionados.length > 0 && (
-        <div class="revela">
+        <div>
           <h2>Combina com</h2>
           <ul class="lista-servicos">
             {relacionados.map((s) => (
@@ -76,4 +76,3 @@ const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
   <Chamada titulo={`Precisa de ${servico.nome.toLowerCase()}?`} href={linkOrcamento} />
 </Base>
 
-<script src="../../scripts/revela.ts"></script>

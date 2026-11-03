@@ -13,7 +13,7 @@ import { servicos, servicosPorGrupo } from '../../data/servicos';
 >
   <Heroi
     sobretitulo="Serviços"
-    titulo="Tudo o que um evento precisa"
+    titulo="Serviços"
     lead="Contrate um serviço ou o evento inteiro. A proposta reúne o que você escolher, com a mesma equipe coordenando."
     foto={fotos.plateiaTelao}
   />
@@ -22,9 +22,8 @@ import { servicos, servicosPorGrupo } from '../../data/servicos';
     <div class="largura">
       <div class="paineis">
         {servicosPorGrupo.map((grupo, i) => (
-          <article class="painel revela">
+          <article class="painel">
             <Image src={grupo.foto.src} alt="" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 590px" format="webp" />
-            <span class="painel__num">0{i + 1}</span>
             <h2 style="font-size: 1.4rem; margin-bottom: 8px">{grupo.nome}</h2>
             <p>{grupo.chamada}</p>
             <ul>
@@ -40,12 +39,11 @@ import { servicos, servicosPorGrupo } from '../../data/servicos';
 
   <section class="secao secao--escura">
     <div class="largura">
-      <div class="cabeca revela">
-        <p class="sobretitulo">Lista completa</p>
-        <h2>Os {servicos.length} serviços, um a um</h2>
+      <div class="cabeca">
+        <h2>Todos os serviços</h2>
       </div>
       {servicosPorGrupo.map((grupo) => (
-        <div class="grupo revela">
+        <div class="grupo">
           <div>
             <h3 style="color: var(--azul); margin-bottom: 10px">{grupo.nome}</h3>
             <p>{grupo.chamada}</p>
@@ -69,4 +67,3 @@ import { servicos, servicosPorGrupo } from '../../data/servicos';
   <Chamada />
 </Base>
 
-<script src="../../scripts/revela.ts"></script>

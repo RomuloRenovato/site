@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import simbolo from '../assets/simbolo.svg?raw';
 import type { Foto } from '../data/fotos';
 
 interface Props {
@@ -20,10 +19,6 @@ const { sobretitulo, titulo, lead, foto, voltar } = Astro.props;
       <Image src={foto.src} alt="" widths={[640, 1280]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
     </div>
   )}
-  <div class="aneis" aria-hidden="true">
-    <span></span><span></span><span></span>
-    <div class="ondas" set:html={simbolo} />
-  </div>
   <div class="largura">
     <div class="heroi__conteudo">
       {voltar && <a class="migalha" href={voltar.href}>← {voltar.rotulo}</a>}
