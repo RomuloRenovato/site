@@ -12,7 +12,7 @@ import { site, tiposDeEvento } from '../data/site';
     sobretitulo="Sobre"
     titulo={`Eventos em Juiz de Fora desde ${site.desde}`}
     lead="Uma empresa de produção de eventos que cuida da técnica, da estrutura e das pessoas."
-    foto={fotos.palestra}
+    foto={fotos.openCorp}
   />
 
   <section class="secao">
@@ -32,7 +32,7 @@ import { site, tiposDeEvento } from '../data/site';
       <div>
         <h2>Onde atuamos</h2>
         <p class="lead" style="margin-bottom: 20px">
-          Nossa base é em {site.cidade}, e já levamos a operação completa para outras cidades de Minas Gerais.
+          Nossa base é em {site.cidade}, e já levamos a operação completa para outras cidades de Minas Gerais e para o Rio de Janeiro.
         </p>
         <ul class="etiquetas">
           {site.regioes.map((cidade) => <li>{cidade}</li>)}
@@ -71,8 +71,9 @@ import { site, tiposDeEvento } from '../data/site';
           {tiposDeEvento.map((tipo) => <li>{tipo}</li>)}
         </ul>
       </div>
-      <figure style="margin: 0">
-        <Image src={fotos.painelLed.src} alt={fotos.painelLed.alt} widths={[480, 800]} sizes="(max-width: 900px) 100vw, 540px" format="webp" style="border-radius: var(--raio)" />
+      <figure class="retrato">
+        <Image src={fotos.equipeEscolaFuturo.src} alt={fotos.equipeEscolaFuturo.alt} widths={[480, 800]} sizes="(max-width: 900px) 100vw, 540px" format="webp" />
+        <figcaption>Com os palestrantes do Escola do Futuro, em Teófilo Otoni.</figcaption>
       </figure>
     </div>
   </section>

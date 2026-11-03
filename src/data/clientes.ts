@@ -12,15 +12,18 @@ export interface Cliente {
   imagemAlt?: string;
 }
 
-// Lista informada pela BobSom em 31/10/2026. A seção só aparece quando esta lista tiver itens.
+// Lista informada pela BobSom em 31/10 e 03/11/2026. A seção só aparece quando esta lista tiver itens.
 export const clientes: Cliente[] = [
+  { nome: 'Sebrae', cidade: 'Minas Gerais', servicos: 'Varejo Mais, Minas Solar, Open Corp, Aqui tem Sebrae e Encontro de Cafeicultores' },
   { nome: 'Sesc', cidade: 'Juiz de Fora' },
-  { nome: 'Sebrae', cidade: 'Juiz de Fora' },
   { nome: 'Banco do Brasil', cidade: 'Juiz de Fora' },
+  { nome: 'EBC', cidade: 'Rio de Janeiro', servicos: 'Encontro da Rede Nacional de Comunicação Pública' },
+  { nome: 'IF Sudeste MG', cidade: 'Juiz de Fora', servicos: 'Formatura: projeção, som, becas e canudos' },
+  { nome: 'Rodoviário Camilo dos Santos', cidade: 'Juiz de Fora', servicos: 'Sonorização e DJ na corrida da empresa' },
+  { nome: 'Bluefit', cidade: 'Juiz de Fora', servicos: 'Inauguração da academia' },
   { nome: 'Independência Shopping', cidade: 'Juiz de Fora' },
   { nome: 'Trade Hotel', cidade: 'Juiz de Fora' },
   { nome: 'Premier Park Hotel', cidade: 'Juiz de Fora' },
   { nome: 'Serjusmig', cidade: 'Minas Gerais' },
-  { nome: 'Rodoviário Camilo dos Santos', cidade: 'Juiz de Fora' },
   { nome: 'Catedral Metropolitana de Juiz de Fora', cidade: 'Juiz de Fora' },
 ];

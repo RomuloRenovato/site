@@ -592,6 +592,122 @@ p {
   min-height: 100%;
 }
 
+.mosaico figure {
+  position: relative;
+}
+
+.mosaico figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 36px 16px 14px;
+  background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.85));
+  color: var(--suave);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.mosaico figcaption strong {
+  display: block;
+  color: var(--texto);
+  font-family: var(--titulo);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* Galeria de eventos com legenda */
+.eventos-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 14px;
+}
+
+.eventos-grade figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--painel);
+}
+
+.eventos-grade img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.eventos-grade figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px 18px;
+  color: var(--suave);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.eventos-grade figcaption strong {
+  color: var(--texto);
+  font-family: var(--titulo);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.eventos-grade__cidade {
+  color: var(--azul);
+  font-size: 0.85rem;
+}
+
+/* Lista de exemplos na página do serviço */
+.exemplos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exemplos li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--painel);
+}
+
+.exemplos strong {
+  font-family: var(--titulo);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.exemplos span {
+  color: var(--suave);
+  font-size: 0.9rem;
+}
+
+/* Foto com legenda (Sobre) */
+.retrato {
+  margin: 0;
+}
+
+.retrato img {
+  width: 100%;
+  border-radius: var(--raio);
+}
+
+.retrato figcaption {
+  margin-top: 10px;
+  color: var(--suave);
+  font-size: 0.9rem;
+}
+
 .etiquetas {
   display: flex;
   flex-wrap: wrap;

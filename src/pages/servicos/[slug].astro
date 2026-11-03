@@ -4,6 +4,7 @@ import Chamada from '../../components/Chamada.astro';
 import Heroi from '../../components/Heroi.astro';
 import { grupos, servicos, type Servico } from '../../data/servicos';
 import { tiposDeEvento } from '../../data/site';
+import { eventosDoServico } from '../../data/eventos';
 
 export function getStaticPaths() {
   return servicos.map((servico) => ({ params: { slug: servico.slug }, props: { servico } }));
@@ -16,6 +17,7 @@ interface Props {
 const { servico } = Astro.props;
 const relacionados = servicos.filter((s) => s.slug !== servico.slug && s.grupo === servico.grupo).slice(0, 4);
 const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
+const exemplos = eventosDoServico(servico.slug).slice(0, 6);
 ---
 
 <Base titulo={servico.titulo} descricao={`${servico.resumo} ${servico.texto}`.slice(0, 158)}>
@@ -45,6 +47,27 @@ const linkOrcamento = `/orcamento/?servico=${servico.slug}`;
       </div>
     </div>
   </section>
+
+  {exemplos.length > 0 && (
+    <section class="secao secao--escura">
+      <div class="largura">
+        <div class="cabeca">
+          <h2>Onde já fizemos</h2>
+        </div>
+        <ul class="exemplos">
+          {exemplos.map((e) => (
+            <li>
+              <strong>{e.nome}</strong>
+              <span>{e.cidade}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="acoes" style="margin-top: 28px">
+          <a class="botao botao--contorno" href="/eventos/">Ver os eventos</a>
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="secao">
     <div class="largura duas-colunas">

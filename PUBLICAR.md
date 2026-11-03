@@ -42,16 +42,18 @@ Só a conta `RomuloRenovato` tem acesso ao repositório.
 
 ## O que revisar com a BobSom
 
-- **Textos dos serviços**, em `src/data/servicos.ts`. Buffet, tendas, mobiliário, credenciamento, transmissão, recursos humanos, bandas e os itens de "O que inclui" foram escritos de forma geral: confirmar se descrevem o que é oferecido de fato.
-- **Fotos reais**, em `src/assets/fotos/`: vieram da ficha do Google e podem incluir imagens enviadas por clientes. Algumas mostram marcas de terceiros (Sebrae, g1 e a conferência "Mulheres Edificadoras"): confirme se podem aparecer.
-- **Fotos ilustrativas** (marcadas com `ilustrativa: true` em `src/data/fotos.ts`): `plateia-palestrante`, `plateia-conferencia`, `plateia-telao`, `transmissao-camera`, `iluminacao-varas`, `iluminacao-palco`, `feira-pavilhao` e `credenciamento-mesas` são do Unsplash (licença livre para uso comercial, sem atribuição). **Não são eventos da BobSom** e por isso não entram na galeria "nossos eventos"; aparecem só como fundo e ilustração dos serviços. Troque pelas fotos originais da empresa assim que tiver, principalmente a da abertura (`plateia-palestrante`).
+- **Textos dos serviços**, em `src/data/servicos.ts`. Buffet, tendas, mobiliário, credenciamento, transmissão, recursos humanos, bandas, identidade visual e os itens de "O que inclui" foram escritos de forma geral: confirmar se descrevem o que é oferecido de fato. Faltam fatos concretos (equipamentos, tamanhos de LED, maior público atendido).
+- **Fotos e eventos**, em `src/data/fotos.ts` e `src/data/eventos.ts`: as 20 fotos enviadas em 03/11/2026 entraram com a descrição dada pela BobSom (evento, cidade, o que foi feito). O Encontro da Rede Nacional de Comunicação Pública (EBC, Rio de Janeiro) veio sem a descrição do serviço e aparece só com a cidade. Falta o **ano** de cada evento. Algumas fotos mostram marcas de terceiros (Sebrae, Unimed, Bluefit, Camilo dos Santos, IF Sudeste MG, EBC) e pessoas identificáveis (palestrantes e equipe): confirmar que podem aparecer.
+- **Fotos da ficha do Google** que continuam no site (`src/assets/fotos/*.jpg`): tenda, buffet e salões ilustram os serviços de tendas, buffet e mobiliário.
 - **Depoimentos**, em `src/data/depoimentos.ts`. São trechos reais do Google, com nome abreviado.
 - **Facebook**: preencher `facebook` em `src/data/site.ts` com o endereço da página. Enquanto estiver vazio, o link não aparece.
 - **Nota no Google**: "5,0" é texto fixo em `src/pages/index.astro`. Atualize se mudar.
+- **Cidades** em `src/data/site.ts` (`regioes`): as da lista original (Uberaba, Lavras, Montes Claros, Viçosa) mais as cidades dos eventos enviados.
 
 ## Como atualizar
 
-- **Clientes e eventos:** a lista em `src/data/clientes.ts` tem os nomes passados em 31/10/2026 (Sesc, Sebrae, Banco do Brasil, Independência Shopping, Trade Hotel, Premier Park Hotel, Serjusmig, Rodoviário Camilo dos Santos e Catedral Metropolitana), só em texto. Logo de cliente, só com autorização dele. Eventos como festival de queijo ou festival de inverno **não** entraram: não achei registro público ligando a BobSom a eles. Quando confirmar o nome exato e o ano de cada um, acrescente na mesma lista com `servicos` (ex.: "Sonorização e palco").
-- **Fotos:** coloque o arquivo em `src/assets/fotos/` e registre em `src/data/fotos.ts`.
+- **Eventos:** cada evento em `src/data/eventos.ts` tem nome, cidade, o que a BobSom fez, a foto e os slugs dos serviços relacionados (aparecem em "Onde já fizemos" na página do serviço). A ordem da lista é a ordem da galeria; a home mostra cinco deles (`mosaico` em `src/pages/index.astro`).
+- **Clientes:** `src/data/clientes.ts`, só em texto. Logo de cliente, só com autorização dele.
+- **Fotos:** coloque o arquivo em `src/assets/fotos/` (webp ou jpg, no tamanho original) e registre em `src/data/fotos.ts`; depois ligue a um evento ou a um serviço.
 - **Contatos e link de avaliação:** `src/data/site.ts` e `src/data/google.json`. O QR é refeito a cada build.
 - **Testar localmente:** `npm install` e depois `npm run dev`.

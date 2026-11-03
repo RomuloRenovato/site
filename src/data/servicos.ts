@@ -6,22 +6,22 @@ export const grupos: Record<Grupo, { nome: string; chamada: string; foto: Foto }
   producao: {
     nome: 'Produção',
     chamada: 'Um responsável pelo evento inteiro, do planejamento à desmontagem.',
-    foto: fotos.plateiaConferencia,
+    foto: fotos.ecidades,
   },
   tecnica: {
     nome: 'Som, luz e imagem',
     chamada: 'A parte técnica que o público sente, mesmo sem perceber.',
-    foto: fotos.painelLed,
+    foto: fotos.escolaFuturoPalco,
   },
   estrutura: {
     nome: 'Estrutura e montagem',
     chamada: 'Palco, stands e estrutura montados com segurança e no prazo.',
-    foto: fotos.iluminacaoVaras,
+    foto: fotos.aquiTemSebrae,
   },
   operacao: {
     nome: 'Pessoas e recepção',
     chamada: 'Quem recebe, organiza e atende os participantes.',
-    foto: fotos.credenciamentoMesas,
+    foto: fotos.openCorp,
   },
 };
 
@@ -52,7 +52,7 @@ export const servicos: Servico[] = [
       'Coordenação da montagem e da desmontagem',
       'Acompanhamento durante o evento',
     ],
-    foto: fotos.plateiaPalestrante,
+    foto: fotos.ecidades,
   },
   {
     slug: 'sonorizacao',
@@ -68,7 +68,7 @@ export const servicos: Servico[] = [
       'Passagem de som antes do evento',
       'Atendimento a ambientes internos e externos',
     ],
-    foto: fotos.auditorioPalco,
+    foto: fotos.nucleoConhecimento,
   },
   {
     slug: 'iluminacao',
@@ -84,7 +84,7 @@ export const servicos: Servico[] = [
       'Iluminação de áreas externas',
       'Cores combinadas com a identidade do evento',
     ],
-    foto: fotos.iluminacaoVaras,
+    foto: fotos.escolaFuturoPalco,
   },
   {
     slug: 'projecao-e-painel-de-led',
@@ -100,7 +100,7 @@ export const servicos: Servico[] = [
       'Monitores de apoio para palco',
       'Operação de conteúdo durante o evento',
     ],
-    foto: fotos.painelLed,
+    foto: fotos.rncpEbc,
   },
   {
     slug: 'transmissao',
@@ -115,7 +115,7 @@ export const servicos: Servico[] = [
       'Operação da transmissão ao vivo',
       'Integração com o som e o telão do evento',
     ],
-    foto: fotos.transmissaoCamera,
+    foto: fotos.rafaelCortez,
   },
   {
     slug: 'bandas-shows-e-dj',
@@ -131,7 +131,7 @@ export const servicos: Servico[] = [
       'Som e luz para shows',
       'Apoio técnico aos artistas',
     ],
-    foto: fotos.iluminacaoPalco,
+    foto: fotos.equipeDjBluefit,
   },
   {
     slug: 'palestras-e-audiovisual',
@@ -147,7 +147,7 @@ export const servicos: Servico[] = [
       'Mesa de operação durante a programação',
       'Montagem de palco e mesa de convidados',
     ],
-    foto: fotos.plateiaTelao,
+    foto: fotos.escolaFuturoPlateia,
   },
   {
     slug: 'montagem-de-palco',
@@ -163,7 +163,7 @@ export const servicos: Servico[] = [
       'Integração com som, luz e LED',
       'Montagem e desmontagem',
     ],
-    foto: fotos.plateiaPalestrante,
+    foto: fotos.aquiTemSebrae,
   },
   {
     slug: 'montagem-de-stands',
@@ -179,7 +179,23 @@ export const servicos: Servico[] = [
       'Montagem e desmontagem',
       'Iluminação e audiovisual integrados',
     ],
-    foto: fotos.feiraPavilhao,
+    foto: fotos.summitInovaInvest,
+  },
+  {
+    slug: 'identidade-visual',
+    nome: 'Identidade visual do evento',
+    grupo: 'estrutura',
+    titulo: 'Identidade visual para eventos em Juiz de Fora',
+    resumo: 'Painel de fundo de palco, banners e sinalização com a marca do evento.',
+    texto:
+      'A marca do evento aparece onde o público olha: no fundo do palco, na entrada, no credenciamento e nos stands. Produzimos e montamos o painel de fundo (backdrop), banners, testeiras e sinalização, integrados à iluminação e ao painel de LED, para o espaço ficar com a cara do evento.',
+    itens: [
+      'Painel de fundo de palco (backdrop)',
+      'Banners, testeiras e sinalização',
+      'Aplicação da marca no credenciamento e nos stands',
+      'Integração com iluminação e painel de LED',
+    ],
+    foto: fotos.congressoVendas,
   },
   {
     slug: 'locacao-de-estrutura-e-tendas',
@@ -210,7 +226,7 @@ export const servicos: Servico[] = [
       'Organização do layout do espaço',
       'Entrega e retirada',
     ],
-    foto: fotos.palestra,
+    foto: fotos.minasSolar,
   },
   {
     slug: 'credenciamento',
@@ -225,7 +241,7 @@ export const servicos: Servico[] = [
       'Equipe de atendimento no local',
       'Organização do fluxo de entrada',
     ],
-    foto: fotos.credenciamentoMesas,
+    foto: fotos.varejoMaisCredenciamento,
   },
   {
     slug: 'recursos-humanos',
@@ -240,7 +256,7 @@ export const servicos: Servico[] = [
       'Apoio operacional',
       'Coordenação junto à produção',
     ],
-    foto: fotos.plateiaConferencia,
+    foto: fotos.openCorp,
   },
   {
     slug: 'buffet',

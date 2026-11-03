@@ -17,7 +17,7 @@ export const site = {
   instagramNome: '@bobsom.jf',
   // Vazio esconde o link. Preencher com o endereço confirmado da página.
   facebook: '',
-  regioes: ['Juiz de Fora', 'Uberaba', 'Lavras', 'Montes Claros', 'Viçosa'],
+  regioes: ['Juiz de Fora', 'Teófilo Otoni', 'Ipatinga', 'Ponte Nova', 'Manhuaçu', 'Divinópolis', 'Tiradentes', 'Arapuá', 'Uberaba', 'Lavras', 'Montes Claros', 'Viçosa', 'Rio de Janeiro'],
   avaliarUrl: `https://search.google.com/local/writereview?placeid=${google.placeId}`,
   fichaGoogleUrl: `https://www.google.com/maps/search/?api=1&query=BobSom&query_place_id=${google.placeId}`,
 };

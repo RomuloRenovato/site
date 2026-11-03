@@ -6,24 +6,20 @@ import Chamada from '../components/Chamada.astro';
 import Clientes from '../components/Clientes.astro';
 import Icone from '../components/Icone.astro';
 import { fotos } from '../data/fotos';
+import { eventos } from '../data/eventos';
 import { servicosPorGrupo } from '../data/servicos';
 import { depoimentos } from '../data/depoimentos';
 import { site, linkWhatsApp } from '../data/site';
 
 const tipos = [
-  { nome: 'Corporativos', texto: 'Convenções, lançamentos, treinamentos e confraternizações de empresas.', foto: fotos.painelLed },
-  { nome: 'Congressos e palestras', texto: 'Auditório, som, telão, transmissão e credenciamento para grandes plateias.', foto: fotos.plateiaPalestrante },
-  { nome: 'Feiras e exposições', texto: 'Stands em octanorme, estrutura, iluminação e recepção de visitantes.', foto: fotos.feiraPavilhao },
-  { nome: 'Evangélicos e escolares', texto: 'Cultos, conferências, formaturas e celebrações de escolas.', foto: fotos.auditorioPalco },
+  { nome: 'Corporativos', texto: 'Convenções, lançamentos, treinamentos e confraternizações de empresas.', foto: fotos.nucleoConhecimento },
+  { nome: 'Congressos e palestras', texto: 'Auditório, som, telão, transmissão e credenciamento para grandes plateias.', foto: fotos.escolaFuturoPlateia },
+  { nome: 'Feiras e exposições', texto: 'Stands em octanorme, estrutura, iluminação e recepção de visitantes.', foto: fotos.summitInovaInvest },
+  { nome: 'Evangélicos e escolares', texto: 'Cultos, conferências, formaturas e celebrações de escolas.', foto: fotos.formaturaIf },
 ];
 
-const mosaico = [
-  { foto: fotos.palestra, larga: true },
-  { foto: fotos.painelLed },
-  { foto: fotos.auditorioPalco },
-  { foto: fotos.tenda },
-  { foto: fotos.salaoAzul },
-];
+// Cinco eventos da galeria para a home: o primeiro ocupa dois terços da largura.
+const mosaico = [eventos[5], eventos[1], eventos[6], eventos[3], eventos[9]].map((evento, i) => ({ evento, larga: i === 0 }));
 
 const whatsapp = linkWhatsApp('Olá, BobSom! Vim pelo site e gostaria de falar sobre um evento.');
 ---
@@ -31,7 +27,7 @@ const whatsapp = linkWhatsApp('Olá, BobSom! Vim pelo site e gostaria de falar s
 <Base>
   <section class="heroi">
     <div class="heroi__fundo">
-      <Image src={fotos.plateiaPalestrante.src} alt="" widths={[640, 1280, 1800]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
+      <Image src={fotos.escolaFuturoPalco.src} alt="" widths={[640, 1280, 1800]} sizes="100vw" format="webp" loading="eager" fetchpriority="high" />
     </div>
     <div class="largura">
       <div class="heroi__conteudo">
@@ -110,14 +106,15 @@ const whatsapp = linkWhatsApp('Olá, BobSom! Vim pelo site e gostaria de falar s
         <h2>Eventos</h2>
       </div>
       <div class="mosaico">
-        {mosaico.map(({ foto, larga }) => (
+        {mosaico.map(({ evento, larga }) => (
           <figure class={larga ? 'larga' : undefined}>
-            <Image src={foto.src} alt={foto.alt} widths={[420, 640, 900]} sizes={larga ? '(max-width: 900px) 100vw, 790px' : '(max-width: 560px) 100vw, 390px'} format="webp" />
+            <Image src={evento.foto.src} alt={evento.foto.alt} widths={[420, 640, 900]} sizes={larga ? '(max-width: 900px) 100vw, 790px' : '(max-width: 560px) 100vw, 390px'} format="webp" />
+            <figcaption><strong>{evento.nome}</strong> {evento.cidade}</figcaption>
           </figure>
         ))}
       </div>
       <div class="acoes" style="margin-top: 28px">
-        <a class="botao botao--contorno" href="/eventos/">Ver mais fotos</a>
+        <a class="botao botao--contorno" href="/eventos/">Ver todos os eventos</a>
         <a class="botao botao--contorno" href={site.instagram} target="_blank" rel="noopener">
           <Icone nome="instagram" /> {site.instagramNome}
         </a>
