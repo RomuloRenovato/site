@@ -18,7 +18,7 @@
 
 .heroi__fundo img {
   object-fit: cover;
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .heroi__fundo::after {
@@ -26,8 +26,21 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(0 0 0 / 0.94) 0%, rgb(0 0 0 / 0.78) 42%, rgb(0 0 0 / 0.3) 100%),
-    linear-gradient(180deg, rgb(0 0 0 / 0.2) 0%, transparent 35%, var(--preto) 100%);
+    linear-gradient(90deg, rgb(0 0 0 / 0.95) 0%, rgb(0 0 0 / 0.85) 45%, rgb(0 0 0 / 0.35) 100%),
+    linear-gradient(180deg, rgb(0 0 0 / 0.25) 0%, transparent 35%, var(--preto) 100%);
+}
+
+/* Texto sobre foto: sempre com sombra, para não depender só do véu. */
+.heroi__conteudo,
+.painel > :not(img),
+.tipo div,
+.mosaico figcaption {
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.75), 0 0 14px rgb(0 0 0 / 0.5);
+}
+
+.heroi__conteudo .botao,
+.painel .botao {
+  text-shadow: none;
 }
 
 .heroi__conteudo {
@@ -95,13 +108,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(0.85);
 }
 
 .painel::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.1) 0%, rgb(0 0 0 / 0.55) 45%, rgb(0 0 0 / 0.94) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.2) 0%, rgb(0 0 0 / 0.5) 25%, rgb(0 0 0 / 0.9) 45%, rgb(0 0 0 / 0.97) 100%);
 }
 
 .painel > :not(img) {
@@ -136,7 +150,8 @@
   padding: 7px 15px;
   border: 1px solid rgb(255 255 255 / 0.28);
   border-radius: var(--raio);
-  background: rgb(0 0 0 / 0.5);
+  background: rgb(0 0 0 / 0.65);
+  text-shadow: none;
   color: var(--texto);
   font-size: 0.93rem;
   font-weight: 600;
@@ -176,7 +191,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 35%, rgb(0 0 0 / 0.95) 100%);
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.05) 0%, rgb(0 0 0 / 0.35) 40%, rgb(0 0 0 / 0.9) 70%, rgb(0 0 0 / 0.97) 100%);
 }
 
 .tipo div {
@@ -205,6 +220,10 @@
   .painel {
     min-height: 360px;
     padding: 22px;
+  }
+  /* No celular o texto sobe mais na foto: escurece a imagem inteira. */
+  .painel > img {
+    filter: brightness(0.6);
   }
   .tipos {
     grid-template-columns: repeat(2, minmax(0, 1fr));
