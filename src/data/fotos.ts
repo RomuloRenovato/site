@@ -41,7 +41,7 @@ export interface Foto {
 
 export const categorias: Record<Categoria, string> = {
   corporativo: 'Corporativos, congressos e palestras',
-  religioso: 'Evangélicos',
+  religioso: 'Religiosos',
   social: 'Recepções',
 };
 

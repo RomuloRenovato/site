@@ -45,7 +45,7 @@ export const servicos: Servico[] = [
     titulo: 'Produção de eventos em Juiz de Fora',
     resumo: 'Planejamento, fornecedores e execução em um só lugar.',
     texto:
-      'Você conta o que precisa e a BobSom cuida do conjunto: define a estrutura, organiza a montagem e acompanha o evento até o fim. Atuamos em eventos corporativos, congressos, feiras, palestras e eventos evangélicos, com a mesma equipe coordenando as etapas.',
+      'Você conta o que precisa e a BobSom cuida do conjunto: define a estrutura, organiza a montagem e acompanha o evento até o fim. Atuamos em eventos corporativos, congressos, feiras, palestras e eventos religiosos, com a mesma equipe coordenando as etapas.',
     itens: [
       'Levantamento das necessidades do evento',
       'Proposta reunindo todos os serviços',
@@ -109,7 +109,7 @@ export const servicos: Servico[] = [
     titulo: 'Transmissão de eventos ao vivo em Juiz de Fora',
     resumo: 'Seu evento também para quem não está no local.',
     texto:
-      'Para congressos, cultos, palestras e reuniões com público remoto, cuidamos da captação de imagem e som e da transmissão durante o evento.',
+      'Para congressos, cultos, missas, palestras e reuniões com público remoto, cuidamos da captação de imagem e som e da transmissão durante o evento.',
     itens: [
       'Captação de imagem e áudio',
       'Operação da transmissão ao vivo',
@@ -156,7 +156,7 @@ export const servicos: Servico[] = [
     titulo: 'Montagem de palco para eventos em Juiz de Fora',
     resumo: 'Palco no tamanho certo, com acabamento e segurança.',
     texto:
-      'Montamos o palco de acordo com o espaço e a programação, para apresentações, palestras, cultos e shows, com a integração de som, luz e imagem.',
+      'Montamos o palco de acordo com o espaço e a programação, para apresentações, palestras, cultos, missas e shows, com a integração de som, luz e imagem.',
     itens: [
       'Palco dimensionado para o espaço',
       'Acesso por escada e acabamento',

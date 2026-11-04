@@ -31,7 +31,7 @@ export const tiposDeEvento = [
   'Congressos e palestras',
   'Feiras e exposições',
   'Lançamentos e convenções',
-  'Evangélicos',
+  'Religiosos',
   'Escolares e formaturas',
   'Sociais',
 ];
